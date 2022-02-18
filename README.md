@@ -1,2 +1,2 @@
 # nesxt-bolierplate
-## nestJs and nextJS bolierplate 
+## nestJS and nextJS bolierplate 
