@@ -1,3 +1,2 @@
-# Mymy
-
-## MySQL in My hands
+# nesxt-bolierplate
+## nestJs and nextJS bolierplate 
