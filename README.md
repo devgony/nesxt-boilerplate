@@ -1,2 +1,2 @@
-# nesxt-bolierplate
-## nestJS and nextJS bolierplate 
+# nesxt-boilerplate
+## nestJS and nextJS boilerplate 
