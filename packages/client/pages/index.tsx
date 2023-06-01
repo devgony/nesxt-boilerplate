@@ -29,9 +29,9 @@ const Home = ({
       login: { ok, token, error },
     } = data;
     if (ok && token) {
-      console.log(token);
+      alert('login success');
     } else {
-      console.log(error);
+      alert(error);
     }
   };
   const [login, { data: loginResult, loading }] = useMutation<
