@@ -8,6 +8,8 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { JwtModule } from './jwt/jwt.module';
 import { DbsModule } from './dbs/dbs.module';
 import { Db } from './dbs/entities/dbs.entity';
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
 
 @Module({
   imports: [
@@ -20,14 +22,17 @@ import { Db } from './dbs/entities/dbs.entity';
         DB_HOST: Joi.string().required(),
         DB_PORT: Joi.string().required(),
         DB_USERNAME: Joi.string().required(),
-        DB_PASSWORD: Joi.string(),
+        DB_PASSWORD: Joi.string().allow('').required(),
         DB_NAME: Joi.string().required(),
         PRIVATE_KEY: Joi.string().required(),
       }),
     }),
-    GraphQLModule.forRoot({
+    GraphQLModule.forRoot<ApolloDriverConfig>({
       autoSchemaFile: true,
       installSubscriptionHandlers: true,
+      driver: ApolloDriver,
+      playground: false,
+      plugins: [ApolloServerPluginLandingPageLocalDefault()],
       // introspection: true,
       context: ({ req, connection }) => {
         const TOKEN_KEY = 'x-jwt';
@@ -37,7 +42,7 @@ import { Db } from './dbs/entities/dbs.entity';
       },
     }),
     TypeOrmModule.forRoot({
-      type: 'mysql',
+      type: 'postgres',
       host: process.env.DB_HOST,
       port: +process.env.DB_PORT,
       username: process.env.DB_USERNAME,

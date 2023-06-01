@@ -19,7 +19,7 @@ export class UsersService {
     password,
   }: CreateUserInput): Promise<CreateUserOutput> {
     try {
-      const exists = await this.users.findOne({ username });
+      const exists = await this.users.findOne({ where: { username } });
       if (exists) {
         return { ok: false, error: '계정이 이미 존재 합니다' };
       }
@@ -35,10 +35,10 @@ export class UsersService {
 
   async login({ username, password }: LoginInput): Promise<LoginOutput> {
     try {
-      const user = await this.users.findOne(
-        { username },
-        { select: ['id', 'password'] },
-      );
+      const user = await this.users.findOne({
+        where: { username },
+        select: ['id', 'password'],
+      });
       if (!user) {
         return { ok: false, error: '유저를 찾을 수 없습니다' };
       }
