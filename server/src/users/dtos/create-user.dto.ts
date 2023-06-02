@@ -1,4 +1,4 @@
-import { InputType, ObjectType, PickType } from "@nestjs/graphql";
+import { Field, InputType, ObjectType, PickType } from "@nestjs/graphql";
 import { ResultOutput } from "src/common/dtos/result.dto";
 import { User } from "../entities/users.entity";
 

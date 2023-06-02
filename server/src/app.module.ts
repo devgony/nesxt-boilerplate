@@ -31,7 +31,7 @@ import { ApolloServerPluginLandingPageLocalDefault } from "@apollo/server/plugin
       driver: ApolloDriver,
       playground: false,
       plugins: [ApolloServerPluginLandingPageLocalDefault()],
-      // introspection: true,
+      introspection: true, // should be false at production
       context: ({ req, connection }) => {
         const TOKEN_KEY = "x-jwt";
         return {
