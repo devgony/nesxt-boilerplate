@@ -6,8 +6,6 @@ import * as Joi from 'joi';
 import { User } from './users/entities/users.entity';
 import { GraphQLModule } from '@nestjs/graphql';
 import { JwtModule } from './jwt/jwt.module';
-import { DbsModule } from './dbs/dbs.module';
-import { Db } from './dbs/entities/dbs.entity';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
 
@@ -50,13 +48,12 @@ import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin
       database: process.env.DB_NAME,
       synchronize: process.env.NODE_ENV !== 'production', // migrate current state to model
       logging: true,
-      entities: [User, Db],
+      entities: [User],
     }),
     JwtModule.forRoot({
       privateKey: process.env.PRIVATE_KEY,
     }),
     UsersModule,
-    DbsModule,
   ],
   controllers: [],
   providers: [],
