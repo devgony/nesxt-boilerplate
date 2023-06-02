@@ -12,11 +12,11 @@ import { errLog } from "src/common/hooks/errLog";
 export class User extends CoreEntity {
   @Field(() => String, { nullable: false })
   @Column({ unique: true, nullable: false })
-  username: string;
+  username!: string;
 
   @Field(() => String, { nullable: false })
   @Column({ nullable: false })
-  password: string;
+  password!: string;
 
   @BeforeInsert()
   @BeforeUpdate()

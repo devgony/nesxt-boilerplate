@@ -8,6 +8,12 @@ import { GraphQLModule } from "@nestjs/graphql";
 import { JwtModule } from "./jwt/jwt.module";
 import { ApolloDriver, ApolloDriverConfig } from "@nestjs/apollo";
 import { ApolloServerPluginLandingPageLocalDefault } from "@apollo/server/plugin/landingPage/default";
+import { Request } from "express";
+
+interface IContext {
+  req: Request;
+  connection: any;
+}
 
 @Module({
   imports: [
@@ -32,7 +38,7 @@ import { ApolloServerPluginLandingPageLocalDefault } from "@apollo/server/plugin
       playground: false,
       plugins: [ApolloServerPluginLandingPageLocalDefault()],
       introspection: true, // should be false at production
-      context: ({ req, connection }) => {
+      context: ({ req, connection }: IContext) => {
         const TOKEN_KEY = "x-jwt";
         return {
           token: req ? req.headers[TOKEN_KEY] : connection.context[TOKEN_KEY],
@@ -42,7 +48,7 @@ import { ApolloServerPluginLandingPageLocalDefault } from "@apollo/server/plugin
     TypeOrmModule.forRoot({
       type: "postgres",
       host: process.env.DB_HOST,
-      port: +process.env.DB_PORT,
+      port: +process.env.DB_PORT!,
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
@@ -51,7 +57,7 @@ import { ApolloServerPluginLandingPageLocalDefault } from "@apollo/server/plugin
       entities: [User],
     }),
     JwtModule.forRoot({
-      privateKey: process.env.PRIVATE_KEY,
+      privateKey: process.env.PRIVATE_KEY!,
     }),
     UsersModule,
   ],
