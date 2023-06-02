@@ -1,7 +1,5 @@
 import { gql, useMutation, useQuery } from "@apollo/client";
-import type { InferGetServerSidePropsType, NextPage } from "next";
 import { useForm } from "react-hook-form";
-import client from "../apollo-client";
 import {
   LoginInput,
   LoginMutation,
@@ -18,9 +16,7 @@ const LOGIN = gql`
   }
 `;
 
-const Home = ({
-  data,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const Home = () => {
   const { register, getValues, handleSubmit, formState } = useForm<LoginInput>({
     mode: "onChange",
   });
@@ -55,27 +51,5 @@ const Home = ({
     </form>
   );
 };
-
-export async function getServerSideProps() {
-  const { data } = await client.query({
-    query: gql`
-      query findDbs {
-        findDbs {
-          dbs {
-            id
-            password
-            name
-          }
-        }
-      }
-    `,
-  });
-
-  return {
-    props: {
-      data,
-    },
-  };
-}
 
 export default Home;
