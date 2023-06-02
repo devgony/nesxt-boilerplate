@@ -5,6 +5,7 @@ import {
   LoginMutation,
   LoginMutationVariables,
 } from "../generated/graphql";
+import { Helmet } from "react-helmet";
 
 const LOGIN = gql`
   mutation login($input: LoginInput!) {
@@ -45,6 +46,9 @@ const Home = () => {
   };
   return (
     <form className="flex flex-col w-20" onSubmit={handleSubmit(onSubmit)}>
+      <Helmet>
+        <title>Home | Project Name</title>
+      </Helmet>
       <input placeholder="username" {...register("username")} />
       <input placeholder="password" {...register("password")} />
       <button>login</button>
