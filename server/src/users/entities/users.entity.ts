@@ -1,10 +1,9 @@
 import * as bcrypt from "bcrypt";
 import { Field, InputType, ObjectType } from "@nestjs/graphql";
-import { CoreEntity } from "src/common/entities/core.entity";
-// import { errLog } from 'src/common/hooks/errLog';
+import { CoreEntity } from "../../common/entities/core.entity";
 import { BeforeInsert, BeforeUpdate, Column, Entity } from "typeorm";
 import { InternalServerErrorException } from "@nestjs/common";
-import { errLog } from "src/common/hooks/errLog";
+import { errLog } from "../../common/hooks/errLog";
 
 @InputType("UserEntity", { isAbstract: true }) // to get input as InputType
 @ObjectType()

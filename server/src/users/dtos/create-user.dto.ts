@@ -1,5 +1,5 @@
 import { Field, InputType, ObjectType, PickType } from "@nestjs/graphql";
-import { ResultOutput } from "src/common/dtos/result.dto";
+import { ResultOutput } from "../../common/dtos/result.dto";
 import { User } from "../entities/users.entity";
 
 @InputType() // to use mapped type

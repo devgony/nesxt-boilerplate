@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { errLog } from "src/common/hooks/errLog";
-import { JwtService } from "src/jwt/jwt.service";
+import { errLog } from "../common/hooks/errLog";
+import { JwtService } from "../jwt/jwt.service";
 import { Repository } from "typeorm";
 import { CreateUserInput, CreateUserOutput } from "./dtos/create-user.dto";
 import { LoginInput, LoginOutput } from "./dtos/login.dto";
@@ -29,7 +29,7 @@ export class UsersService {
       return { ok: true };
     } catch (error) {
       errLog(__filename, error);
-      return { ok: false, error: "Could not create user." };
+      return { ok: false, error: "Could not create user" };
     }
   }
 
@@ -37,31 +37,20 @@ export class UsersService {
     try {
       const user = await this.users.findOne({
         where: { username },
-        select: [
-          "id",
-          "password",
-          "username",
-          "username",
-          "username",
-          "username",
-          "username",
-          "username",
-          "username",
-          "username",
-        ],
+        select: ["id"],
       });
       if (!user) {
-        return { ok: false, error: "유저를 찾을 수 없습니다" };
+        return { ok: false, error: "Could not find user" };
       }
       const passwordCorrect = await user.checkPassword(password);
       if (!passwordCorrect) {
-        return { ok: false, error: "패스워드가 틀립니다" };
+        return { ok: false, error: "Wrong password" };
       }
       const token = this.jwtService.sign(user.id);
       return { ok: true, token };
     } catch (error) {
       errLog(__filename, error);
-      return { ok: false, error: "로그인 할 수 없습니다" };
+      return { ok: false, error: "Could not login" };
     }
   }
 }
