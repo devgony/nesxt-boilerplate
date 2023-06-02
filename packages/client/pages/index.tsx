@@ -1,12 +1,12 @@
-import { gql, useMutation, useQuery } from '@apollo/client';
-import type { InferGetServerSidePropsType, NextPage } from 'next';
-import { useForm } from 'react-hook-form';
-import client from '../apollo-client';
+import { gql, useMutation, useQuery } from "@apollo/client";
+import type { InferGetServerSidePropsType, NextPage } from "next";
+import { useForm } from "react-hook-form";
+import client from "../apollo-client";
 import {
   LoginInput,
   LoginMutation,
   LoginMutationVariables,
-} from '../generated/graphql';
+} from "../generated/graphql";
 
 const LOGIN = gql`
   mutation login($input: LoginInput!) {
@@ -22,14 +22,14 @@ const Home = ({
   data,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const { register, getValues, handleSubmit, formState } = useForm<LoginInput>({
-    mode: 'onChange',
+    mode: "onChange",
   });
   const onCompleted = (data: LoginMutation) => {
     const {
       login: { ok, token, error },
     } = data;
     if (ok && token) {
-      alert('login success');
+      alert("login success");
     } else {
       alert(error);
     }
@@ -49,8 +49,8 @@ const Home = ({
   };
   return (
     <form className="flex flex-col w-20" onSubmit={handleSubmit(onSubmit)}>
-      <input placeholder="username" {...register('username')} />
-      <input placeholder="password" {...register('password')} />
+      <input placeholder="username" {...register("username")} />
+      <input placeholder="password" {...register("password")} />
       <button>login</button>
     </form>
   );

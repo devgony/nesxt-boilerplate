@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 
 services:
   postgres:
@@ -8,4 +8,4 @@ services:
       POSTGRES_HOST_AUTH_METHOD: trust
       POSTGRES_DB: project_db
     ports:
-      - '5432:5432'
+      - "5432:5432"
