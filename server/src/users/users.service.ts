@@ -37,7 +37,7 @@ export class UsersService {
     try {
       const user = await this.users.findOne({
         where: { username },
-        select: ["id"],
+        select: ["id", "password"],
       });
       if (!user) {
         return { ok: false, error: "Could not find user" };

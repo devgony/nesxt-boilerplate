@@ -25,7 +25,7 @@ export class User extends CoreEntity {
         this.password = await bcrypt.hash(this.password, 10);
       } catch (e) {
         errLog(__filename, e);
-        throw new InternalServerErrorException(); // for the case of "Couldn't create account"
+        throw new InternalServerErrorException();
       }
     }
   }
