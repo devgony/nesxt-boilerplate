@@ -4,11 +4,15 @@
   "scripts": {
     "dev": "npm run gen & next dev",
     "build": "next build",
+    "format": "prettier -w . --config=../.prettierrc --ignore-path ../.prettierignore",
+    "format:ci": "prettier -l . --config=../.prettierrc --ignore-path ../.prettierignore",
     "start": "next start",
     "lint": "next lint",
     "gen": "graphql-codegen --config codegen.yml --watch",
-    "test": "jest --watch --passWithNoTests",
-    "test:ci": "jest --ci --passWithNoTests"
+    "test": "jest",
+    "test:ci": "jest --ci",
+    "test:watch": "jest --watch",
+    "test:cov": "jest --coverage"
   },
   "dependencies": {
     "@apollo/client": "^3.7.15",
