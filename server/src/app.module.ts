@@ -1,9 +1,9 @@
 import { Module } from "@nestjs/common";
 import { ConfigModule } from "@nestjs/config";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { UsersModule } from "./users/users.module";
+import { AccountsModule } from "./accounts/accounts.module";
 import * as Joi from "joi";
-import { User } from "./users/entities/users.entity";
+import { Account } from "./accounts/entities/account.entity";
 import { GraphQLModule } from "@nestjs/graphql";
 import { JwtModule } from "./jwt/jwt.module";
 import { ApolloDriver, ApolloDriverConfig } from "@nestjs/apollo";
@@ -54,12 +54,12 @@ interface IContext {
       database: process.env.DB_NAME,
       synchronize: process.env.NODE_ENV !== "production", // migrate current state to model
       logging: true,
-      entities: [User],
+      entities: [Account],
     }),
     JwtModule.forRoot({
       privateKey: process.env.PRIVATE_KEY!,
     }),
-    UsersModule,
+    AccountsModule,
   ],
   controllers: [],
   providers: [],

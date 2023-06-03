@@ -5,13 +5,13 @@ import { BeforeInsert, BeforeUpdate, Column, Entity } from "typeorm";
 import { InternalServerErrorException } from "@nestjs/common";
 import { errLog } from "../../common/hooks/errLog";
 
-@InputType("UserEntity", { isAbstract: true }) // to get input as InputType
+@InputType("AccountEntity", { isAbstract: true }) // to get input as InputType
 @ObjectType()
 @Entity()
-export class User extends CoreEntity {
+export class Account extends CoreEntity {
   @Field(() => String, { nullable: false })
   @Column({ unique: true, nullable: false })
-  username!: string;
+  name!: string;
 
   @Field(() => String, { nullable: false })
   @Column({ nullable: false })
